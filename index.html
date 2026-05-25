@@ -21,7 +21,8 @@
   #app {
     position: relative;
     width: 100vw;
-    height: 100vh;
+    height: 100vh; /* fallback for older browsers */
+    height: 100dvh; /* dynamic viewport — correctly accounts for mobile browser chrome */
     overflow: hidden;
   }
 
@@ -110,14 +111,14 @@
 
   /* When drawer is open, shrink the stage so the active fan stays in view */
   body.drawer-open #stage {
-    bottom: var(--drawer-h, 60vh);
+    bottom: var(--drawer-h, 60dvh);
   }
 
   #fans-grid {
     display: flex;
     flex-wrap: wrap;
-    gap: 8px;
-    padding: 8px;
+    gap: 6px;
+    padding: 4px;
     justify-content: center;
     align-items: center;
     align-content: center;
@@ -267,8 +268,8 @@
     left: 0;
     right: 0;
     bottom: 0;
-    height: var(--drawer-h, 60vh);
-    max-height: 70vh;
+    height: var(--drawer-h, 60dvh);
+    max-height: 70dvh;
     min-height: 340px;
     background: rgba(255, 255, 255, 0.97);
     backdrop-filter: blur(14px);
@@ -616,8 +617,8 @@ function layoutFans() {
   if (fans.length === 0) return;
   const stage = document.getElementById("stage");
   const stageRect = stage.getBoundingClientRect();
-  // grid has padding: 8px on each side, gap: 8px
-  const padX = 16, padY = 16, gap = 8;
+  // grid has padding: 4px on each side, gap: 6px
+  const padX = 8, padY = 8, gap = 6;
   const availW = Math.max(0, stageRect.width - padX);
   const availH = Math.max(0, stageRect.height - padY);
 
